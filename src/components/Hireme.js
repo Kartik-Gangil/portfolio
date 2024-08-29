@@ -2,11 +2,12 @@ import React from 'react'
 import Photo from '../assets/photo2.png'
 
 export default function Hireme() {
+    const resume = "https://drive.google.com/file/d/1N9fs4N5FaBzexjJF3qPbqU3ETorkz4Qq/view?usp=sharing"
     const onButtonClick = () => {
-        const pdfUrl = "Sample.pdf";
+        const pdfUrl = {resume};
         const link = document.createElement("a");
         link.href = pdfUrl;
-        link.download = "document.pdf"; // specify the filename
+        link.download = "Kartik_Resume.pdf"; // specify the filename
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
