@@ -39,7 +39,7 @@ function App() {
   return (
     <>
       {isMobileView ? (
-        <p>Mobile View</p>
+        <h1 className='text-center'>Open ON laptop , mobile view is in progress available soon</h1>
       ) : (
         <Parallax pages={pages} style={{ left: "0", top: "0", backgroundImage: `url(${backgroundimage})` }} className='Animation' >
           <ParallaxLayer sticky={{ start: 0, end: 5 }} offset={0} speed={0.5} style={{zIndex:10}} >
