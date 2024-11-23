@@ -4,7 +4,7 @@ export default function Card(props) {
     return (
         <div className='col-lg-3 col-md-4 col-sm-6 col-6 mb-2'>
 
-            <div className=" card" >
+            <div className="card" style={{height : 350}} >
                 <img src={props.image} className="card-img-top" alt="" height={200} width={200} style={{objectFit : "contain"}}/>
                 <div className="card-body">
                     <h5 className="card-title ">{props.title}</h5>
