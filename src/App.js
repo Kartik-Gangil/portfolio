@@ -46,6 +46,38 @@ function App() {
               <Main />
             </ParallaxLayer>
 
+            {/* flags content creator right */}
+            <ParallaxLayer offset={2} speed={0.25} style={{ zIndex: 40 }}>
+              <div className="flagsR" >
+                <h1 className='fs-1 fw-bold ' style={{ color: "rgb(255, 119, 0)" }}>Content Creator</h1>
+                <p className='text-white text-center fs-3'>
+                  <i className='fa-brands fa-youtube text-red-600'></i>
+                  &nbsp; Kartik Gangil
+                </p>
+              </div>
+            </ParallaxLayer>
+            <ParallaxLayer offset={3} speed={0.25} style={{ zIndex: 40 }}>
+              {/* flags video editor left */}
+              <div className="flagsL">
+                <h1 className='fs-1 fw-bold ' style={{ color: "rgb(255, 119, 0)" }}>Video Editor</h1>
+                <p className='text-center fs-3 text-white'><i className='fa-brands fa-youtube text-red-600'></i>&nbsp; Kartik Gangil</p>
+              </div>
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={4} speed={0.25} style={{ zIndex: 40 }}>
+              {/* flags web developer right */}
+              <div className="flagsR">
+                <h1 className='fs-1 fw-bold' style={{ color: "rgb(255, 119, 0)" }}>Web Developer</h1>
+                <p className='text-white text-center fs-3'><i className='fa-brands fa-github '></i>&nbsp; Kartik Gangil</p>
+              </div>
+            </ParallaxLayer>
+            <ParallaxLayer offset={5} speed={0.25} style={{ zIndex: 40 }}>
+              {/* flags thumnail designer left */}
+              <div className="flagsL ">
+                <h1 className='fs-1 fw-bold' style={{ color: "rgb(255, 119, 0)" }}>Thumnail Designer</h1>
+              </div>
+            </ParallaxLayer>
+
             <ParallaxLayer sticky={{ start: 0.6, end: 5 }} offset={0.4} speed={0.25} style={{ zIndex: -1 }}>
               <Photo photo={photo} />
             </ParallaxLayer>
@@ -57,6 +89,7 @@ function App() {
             <ParallaxLayer offset={7.8} speed={0.35} >
               <TechStack />
             </ParallaxLayer>
+            
             <ParallaxLayer offset={8.85} speed={0.35} >
               <Footer />
             </ParallaxLayer>
@@ -96,6 +129,7 @@ function App() {
               <h1 className='fs-1 fw-bold ' style={{ color: "rgb(255, 119, 0)" }}>Thumnail Designer</h1>
             </div>
           </ParallaxLayer>
+
           <ParallaxLayer sticky={{ start: 0.6, end: 5 }} offset={0.4} speed={0.25} style={{ zIndex: -1 }}>
             <Photo photo={photo} />
           </ParallaxLayer>
