@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     // Function to check window width and set isMobileView state
     const handleResize = () => {
-      setIsMobileView(window.innerWidth <= 450);
+      setIsMobileView(window.innerWidth <= 699);
     };
 
     // Run once on component mount
@@ -37,16 +37,40 @@ function App() {
   return (
     <>
       {isMobileView ? (
-        <h1 className='text-center'>Open ON laptop , mobile view is in progress available soon</h1>
+        <>
+          <Parallax pages={pages} style={{ left: "0", top: "0", backgroundImage: `url(${backgroundimage})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundAttachment: "fixed" }} className='Animation' >
+
+            <ParallaxLayer sticky={{ start: 0, end: 5 }} offset={0} speed={0.5} style={{ zIndex: 3 }}>
+              <br />
+              <br />
+              <Main />
+            </ParallaxLayer>
+
+            <ParallaxLayer sticky={{ start: 0.6, end: 5 }} offset={0.4} speed={0.25} style={{ zIndex: -1 }}>
+              <Photo photo={photo} />
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={6.3} speed={0.25} >
+              <SubMain />
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={7.8} speed={0.35} >
+              <TechStack />
+            </ParallaxLayer>
+            <ParallaxLayer offset={8.85} speed={0.35} >
+              <Footer />
+            </ParallaxLayer>
+          </Parallax>
+        </>
       ) : (
-        <Parallax pages={pages} style={{ left: "0", top: "0", backgroundImage: `url(${backgroundimage})` }} className='Animation' >
+        <Parallax pages={pages} style={{ left: "0", top: "0", backgroundImage: `url(${backgroundimage})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundAttachment: "fixed" }} className='Animation' >
           <ParallaxLayer sticky={{ start: 0, end: 5 }} offset={0} speed={0.5} style={{ zIndex: 3 }}>
             <Navbar />
             <Main />
           </ParallaxLayer>
-        
+
           {/* flags content creator right */}
-            <ParallaxLayer offset={2} speed={0.25} style={{zIndex:40}}>
+          <ParallaxLayer offset={2} speed={0.25} style={{ zIndex: 40 }}>
             <div className=" flagsR" >
               <h1 className='fs-1 fw-bold ' style={{ color: "rgb(255, 119, 0)" }}>Content Creator</h1>
               <p className='text-white text-center fs-3'><i className='fa-brands fa-youtube text-red-600'></i>&nbsp; Kartik Gangil</p>
@@ -71,10 +95,10 @@ function App() {
             <div className="flagsL">
               <h1 className='fs-1 fw-bold ' style={{ color: "rgb(255, 119, 0)" }}>Thumnail Designer</h1>
             </div>
-            </ParallaxLayer>
-            <ParallaxLayer sticky={{ start: 0.6, end: 5 }} offset={0.4} speed={0.25} style={{zIndex : -1}}>
-              <Photo photo={photo} />
-            </ParallaxLayer>
+          </ParallaxLayer>
+          <ParallaxLayer sticky={{ start: 0.6, end: 5 }} offset={0.4} speed={0.25} style={{ zIndex: -1 }}>
+            <Photo photo={photo} />
+          </ParallaxLayer>
 
           <ParallaxLayer offset={6.3} speed={0.25} >
             <SubMain />

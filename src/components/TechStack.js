@@ -44,9 +44,9 @@ export default function TechStack() {
 
         </div>)}
         <div className="col">
-          <div className="row">
+        
           <TechCardAling/>
-          </div>
+         
         </div>
 
       </div>
