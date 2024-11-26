@@ -9,6 +9,7 @@ import Photo from './components/Photo'
 import photo from './assets/photo.png'
 import { useEffect, useState } from 'react'
 import './App.css'
+import GraphicDesign from './components/GraphicDesign.js'
 
 
 function App() {
@@ -32,7 +33,8 @@ function App() {
     };
   }, []);
 
-  let pages = 9;
+  let pages = 14;
+  let PAGE = 11;
 
   return (
     <>
@@ -86,17 +88,21 @@ function App() {
               <SubMain />
             </ParallaxLayer>
 
-            <ParallaxLayer offset={7.8} speed={0.35} >
+            <ParallaxLayer offset={9.2} speed={0.25} >
+              <GraphicDesign />
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={12.2} speed={0.35} >
               <TechStack />
             </ParallaxLayer>
-            
-            <ParallaxLayer offset={8.85} speed={0.35} >
+
+            <ParallaxLayer offset={13.85} speed={0.35} >
               <Footer />
             </ParallaxLayer>
           </Parallax>
         </>
       ) : (
-        <Parallax pages={pages} style={{ left: "0", top: "0", backgroundImage: `url(${backgroundimage})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundAttachment: "fixed" }} className='Animation' >
+        <Parallax pages={PAGE} style={{ left: "0", top: "0", backgroundImage: `url(${backgroundimage})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundAttachment: "fixed" }} className='Animation' >
           <ParallaxLayer sticky={{ start: 0, end: 5 }} offset={0} speed={0.5} style={{ zIndex: 3 }}>
             <Navbar />
             <Main />
@@ -129,18 +135,29 @@ function App() {
               <h1 className='fs-1 fw-bold ' style={{ color: "rgb(255, 119, 0)" }}>Thumnail Designer</h1>
             </div>
           </ParallaxLayer>
-
+          {/* photo layer */}
           <ParallaxLayer sticky={{ start: 0.6, end: 5 }} offset={0.4} speed={0.25} style={{ zIndex: -1 }}>
             <Photo photo={photo} />
           </ParallaxLayer>
 
           <ParallaxLayer offset={6.3} speed={0.25} >
+            {/* projects card layer */}
             <SubMain />
           </ParallaxLayer>
-          <ParallaxLayer offset={7.4} speed={0.35} >
+
+
+          <ParallaxLayer offset={7.6} speed={0.25} >
+            {/* graphic design card layer */}
+            <GraphicDesign />
+          </ParallaxLayer>
+
+
+
+          <ParallaxLayer offset={9.4} speed={0.35} >
+            {/* techstack layer */}
             <TechStack />
           </ParallaxLayer>
-          <ParallaxLayer offset={8.85} speed={0.35} >
+          <ParallaxLayer offset={10.85} speed={0.35} >
             <Footer />
           </ParallaxLayer>
 

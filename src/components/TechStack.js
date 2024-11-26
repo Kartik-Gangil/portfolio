@@ -25,7 +25,7 @@ export default function TechStack() {
 
     <div className='container'>
       <div className="row rounded-4 ">
-        <h1 className='text-light'>My Skills</h1>
+        <h1 className='text-light fw-bold'> <span style={{ color: "rgb(255, 119, 0) " }}>M</span>y  <span style={{ color: "rgb(255, 119, 0) " }}>S</span>kills</h1>
         <p className='text-light'>I used in my projects</p>
         {!isMobileView && (<div className="col col-lg-4">
           <img src={photo} alt="" style={

@@ -17,7 +17,7 @@ export default function SubMain() {
                                 techStack="MERN Stack , Mongodb , Express js , React js , Node js , HTML , CSS " repo="https://github.com/Kartikgupta666/Expense_Traker_app.git"
                                 host="https://expense-traker-kartik-app.vercel.app/" />
                             <Card
-                                image="https://img.freepik.com/premium-vector/chat-bot-ai-logo-icon_861145-166.jpg"
+                                image="https://d2vrvpw63099lz.cloudfront.net/do-i-need-a-chatbot/header-chat-box.png"
                                 title="Geminie Integrated chatbot"
                                 techStack="Vite , Google gemminie api ,  React js , Node js , HTML , CSS " repo="https://github.com/Kartikgupta666/geminie-integration-in-webhomepage.git"
                                 host="https://geminie-integration-in-webhomepage.vercel.app/" />
@@ -27,14 +27,10 @@ export default function SubMain() {
                                 techStack="Python , APIs" repo="https://github.com/Kartikgupta666/jarvis-using-pyton.git"
                                 host="#" />
                             <Card
-                                image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvsV-yMSGYiCuXGN3sNvz3npXjVjaaxGMGGA&s"
+                                image="https://cdn.prod.website-files.com/655083d9a0623d92b0f7ee76/65d75f240100f47fdc306803_keyboard-clicking-sfx-pack_header.jpg"
                                 title="Keyboard sound utility"
                                 techStack="Python" repo="https://github.com/Kartikgupta666/mechnical-keyboard-utility-in-python.git"
                                 host="#" />
-
-
-
-
 
 
                         </div>
