@@ -24,8 +24,8 @@ export default function Card(props) {
     return (
         <div className={`col-lg-3 col-md-4 col-sm-6 ${mobileview} mb-2`}>
 
-            <div className="card" style={{ height: isMobileView?400:350 }} >
-                <img src={props.image} className="card-img-top" alt="" height={200} width={200} style={{ objectFit: "contain" }} />
+            <div className="card " style={{ height: isMobileView?400:350 }} >
+                <img src={props.image} className="card-img-top" alt="" height={200} width={200} style={{ objectFit: "cover" }} />
                 <div className="card-body">
                     <h5 className="card-title ">{props.title}</h5>
                     <p className="card-text text-break">{props.techStack}</p>
