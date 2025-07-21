@@ -15,8 +15,8 @@ const Contact = () => {
 
     return (
         <section id="contact" className="min-h-screen scroll-mt-24 md:px-40 px-10 mt-48">
-            <h1 className="text-4xl font-bold text-center mb-3">Let's Work Together</h1>
-            <p className="text-lg text-gray-500 text-center">Have a project in mind? I'd love to hear from you!</p>
+            <h1 className="text-4xl font-bold text-center mb-3">Let&apos;s Work Together</h1>
+            <p className="text-lg text-gray-500 text-center">Have a project in mind? I&apos;d love to hear from you!</p>
 
             <div className='grid grid-cols-1 md:grid-cols-2 gap-10 mt-20'>
                 <div className='row'>

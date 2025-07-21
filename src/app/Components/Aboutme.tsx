@@ -3,7 +3,7 @@ const Aboutme = () => {
     return (
         <section id='about' className='min-h-screen scroll-mt-24 mt-20 mb-18 p-5'>
             <h1 className="text-center  text-3xl font-bold">About Me</h1>
-            <p className="text-xl text-gray-700 text-center text-balance">I'm a passionate full-stack developer with over 2 years of experience building web applications. I love turning complex problems into simple, beautiful, and intuitive solutions.</p>
+            <p className="text-xl text-gray-700 text-center text-balance">Im a passionate full-stack developer with over 2 years of experience building web applications. I love turning complex problems into simple, beautiful, and intuitive solutions.</p>
             <div className='mt-20  flex flex-col md:flex-row justify-center items-center gap-5 '>
                 <div className='flex-1 flex items-center justify-center'>
                     <Image

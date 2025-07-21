@@ -58,7 +58,7 @@ const Project = () => {
     return (
         <section id="project" className="min-h-screen scroll-mt-24 md:px-20 px-5 md:mt-0 mt-10">
             <h1 className="text-3xl font-bold text-center mb-3">Featured Projects</h1>
-            <p className="text-lg text-gray-500 text-center">Here are some of my recent works that I'm proud of</p>
+            <p className="text-lg text-gray-500 text-center">Here are some of my recent works that I&apos;m proud of</p>
             <div className="flex flex-wrap justify-evenly mt-15 gap-5">
                 <AnimatedCard />
                 <AnimatedCard />

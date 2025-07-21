@@ -7,7 +7,7 @@ const Hero = () => {
     return (
         <section id="main" className="min-h-screen grid md:grid-cols-2 grid-cols-1 py-10 md:px-20 px-5 items-center h-full bg-gradient-to-br from-blue-50 to-purple-50" >
             <div className="row p-5">
-                <h1 className="text-4xl md:text-6xl md:text-balance font-bold mb-3">Hi, I'm <span className="text-blue-600">Kartik Gangil</span></h1>
+                <h1 className="text-4xl md:text-6xl md:text-balance font-bold mb-3">Hi, Im <span className="text-blue-600">Kartik Gangil</span></h1>
                 <p className="text-preety text-xl md:text-3xl ">Full Stack Developer passionate about creating innovative digital solutions that make a difference</p>
                 <Button className="mt-5 p-5 mx-3 rounded-full cursor-pointer "><Link href="#project">View My Work</Link></Button>
                 <Button variant={"outline"} className="mt-5 p-5 mx-3 rounded-full cursor-pointer "><Link href="#contact">Get in Touch</Link></Button>
