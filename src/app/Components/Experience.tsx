@@ -6,7 +6,7 @@ interface WorkExp {
     year: string;
     role: string;
     company: string;
-}
+}[]
 
 
 const ExpCard = ({ year, role, company }: WorkExp) => {
@@ -34,7 +34,7 @@ const Experience = () => {
         try {
             const res = await fetch("/api/Experience");
             const data = await res.json();
-            const formattedData = data.map((item: any) => ({
+            const formattedData = data.map((item: WorkExp) => ({
                 year: item.year,
                 role: item.role,
                 company: item.company,

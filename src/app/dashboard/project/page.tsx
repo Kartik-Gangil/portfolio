@@ -104,7 +104,7 @@ const Page = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data)
-          const formattedProjects = data.map((project: any) => ({
+          const formattedProjects = data.map((project:any) => ({
             id: project._id,
             title: project.title,
             description: project.description,

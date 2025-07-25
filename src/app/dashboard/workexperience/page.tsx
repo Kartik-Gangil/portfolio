@@ -4,11 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
-interface WorkExp {
-  year: string;
-  role: string;
-  company: string;
-}
+// interface WorkExp {
+//   year: string;
+//   role: string;
+//   company: string;
+// }
 
 interface WorkExpData {
   id: string;

@@ -12,7 +12,7 @@ interface Project {
     techStack: string[];
     image: string;
     githubLink: string;
-    liveLink?: string;
+    liveLink: string;
 }[]
 
 const AnimatedCard = ({ title, description, techStack, image, githubLink, liveLink }: Project) => {
