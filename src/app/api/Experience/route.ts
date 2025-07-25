@@ -1,7 +1,7 @@
 import { connectToDatabase } from '@/lib/mongo';
 import Experience from '@/models/Experience';
 
-export async function GET(request: Request) {
+export async function GET() {
     try {
         await connectToDatabase();
         const response = await Experience.find(); 

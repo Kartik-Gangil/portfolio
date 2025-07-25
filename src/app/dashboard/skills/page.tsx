@@ -10,7 +10,7 @@ const Card = () => {
 
 
 
-const page = () => {
+const Page = () => {
   return (
     <div className='p-5'>
       <h1 className='text-center text-3xl font-bold mb-3'>Skills</h1>
@@ -20,4 +20,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

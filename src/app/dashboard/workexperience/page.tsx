@@ -17,7 +17,7 @@ interface WorkExpData {
   company: string;
 }
 
-const WorkExperience = () => {
+const Page = () => {
   const [workData, setWorkData] = useState<WorkExpData[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [formData, setFormData] = useState<WorkExpData>({
@@ -191,4 +191,4 @@ const WorkExperience = () => {
   );
 };
 
-export default WorkExperience;
+export default Page;

@@ -2,7 +2,7 @@ import { connectToDatabase } from '@/lib/mongo';
 import Project from '@/models/Project'
 
 
-export async function GET(request: Request) {
+export async function GET() {
     try {
         await connectToDatabase();
         const projects = await Project.find();

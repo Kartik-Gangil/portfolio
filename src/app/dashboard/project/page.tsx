@@ -77,7 +77,7 @@ const Card = ({ title, image, id, description, techStack, githubLink, liveLink }
 
 
 
-const page = () => {
+const Page = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [formData, setFormData] = useState<ProjectData>({
@@ -259,4 +259,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
