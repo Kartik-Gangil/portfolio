@@ -65,43 +65,41 @@ const AnimatedCard = ({ title, description, techStack, image, githubLink, liveLi
 
 const Project = () => {
 
-    const [projects, setProjects] = useState<Project[]>([{
-        title: '',
-        description: '',
-        techStack: [],
-        image: '',
-        githubLink: '',
-        liveLink: ''
-    }]);
+    const [projects, setProjects] = useState<Project[]>([
+        {
+            title: "ReadmeUp",
+            description: "AI powered tool to generate README files for GitHub projects, enhancing project visibility and documentation.",
+            techStack: ["React.js", "Tailwind CSS", "Express js", "TypeScript", "Vite", "Generative AI"],
+            image: "https://readmeup.vercel.app/file.png",
+            githubLink: "https://github.com/Kartik-Gangil/AI-based-GITHUB-readme-generator",
+            liveLink: "https://readmeup.vercel.app/"
+        },
+        {
+            title: "Varsha Research Oraginzation",
+            description: "A dynamic website for a research organization, showcasing their research papers and publications.",
+            techStack: ["React.js", "Tailwind CSS", "Material UI", "Express js", "TypeScript", "AWS lightsail"],
+            image: "https://creovate-io.vercel.app/Varsha_research_org_banner.png",
+            githubLink: "https://varsharesearchorganization.com/",
+            liveLink: "https://varsharesearchorganization.com/"
+        },
+        {
+            title: "JARVIS",
+            description: "A personal AI assistant that helps you manage your tasks, schedule, and provides information on demand.",
+            techStack: ["Python", "API", "Generative AI"],
+            image: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/07712d52323517.5608d99892165.png",
+            githubLink: "https://github.com/Kartik-Gangil/jarvis-using-pyton",
+            liveLink: "https://github.com/Kartik-Gangil/jarvis-using-pyton"
+        },
+        {
+            title: "AutoPodder",
+            description: "An AI-powered podcast generator that creates engaging podcasts based on user preferences and topics.",
+            techStack: ["React.js", "Nextjs", "Tailwind CSS", "Express js", "TypeScript", "Generative AI", "ElevenLabs", "Deepgram"],
+            image: "/Autopodder.png",
+            githubLink: "https://github.com/Kartik-Gangil/AutoPodder.git",
+            liveLink: "https://github.com/Kartik-Gangil/AutoPodder.git"
+        },
+    ]);
 
-    const fetchProjects = async () => {
-        try {
-            fetch('/api/Project')
-                .then((res) => res.json())
-                .then((data) => {
-                    console.log(data)
-                    const formattedProjects = data.map((project: any) => ({
-                        title: project.title,
-                        description: project.description,
-                        techStack: project.techStack,
-                        image: project.image ,
-                        githubLink: project.githubLink,
-                        liveLink: project.liveLink || '',
-
-                    }))
-                    setProjects(formattedProjects);
-                    console.log(formattedProjects)
-                });
-
-        }
-        catch (e) {
-            console.log(e)
-        }
-    }
-    useEffect(() => {
-        fetchProjects();
-
-    }, [])
 
     return (
         <section id="project" className="min-h-screen scroll-mt-24 md:px-20 px-5 md:mt-0 mt-10">
