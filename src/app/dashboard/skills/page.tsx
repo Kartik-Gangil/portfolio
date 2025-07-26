@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 
 interface SkillData {
   id: string;
-  icon: React.ReactNode;
+  icon: string;
   domain: string;
   skills: string[];
 }
