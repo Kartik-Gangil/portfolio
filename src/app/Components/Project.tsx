@@ -29,7 +29,7 @@ const AnimatedCard = ({ title, description, techStack, image, githubLink, liveLi
         >
             <div className="relative h-48 overflow-hidden">
                 <Image
-                    src={image}
+                    src={image ? image : "/apple-touch-icon.png"}
                     width={1000}
                     height={1000}
                     alt={title}
@@ -84,7 +84,7 @@ const Project = () => {
                         title: project.title,
                         description: project.description,
                         techStack: project.techStack,
-                        image: project.image,
+                        image: project.image ,
                         githubLink: project.githubLink,
                         liveLink: project.liveLink || '',
 
