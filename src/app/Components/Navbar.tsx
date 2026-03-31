@@ -50,6 +50,7 @@ const Navbar = () => {
                         <Image
                             alt="logo"
                             src="/apple-touch-icon.png"
+                            loading="eager"
                             fill
                             className="object-cover group-hover:scale-110 transition-transform duration-300"
                         />

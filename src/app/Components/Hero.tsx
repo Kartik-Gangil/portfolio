@@ -11,13 +11,13 @@ const Hero = () => {
         <section id="main" className="relative min-h-screen flex items-center justify-center py-20 px-5 md:px-20 overflow-hidden bg-background">
             {/* Animated Background Mesh */}
             <div className="absolute inset-0 z-0 mesh-gradient opacity-60" />
-            
+
             {/* Ambient Glows */}
             <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/20 rounded-full blur-[120px] animate-pulse" />
             <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-accent/20 rounded-full blur-[120px] animate-pulse delay-700" />
 
             <div className="container relative z-10 grid md:grid-cols-2 grid-cols-1 gap-12 items-center">
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
@@ -74,7 +74,7 @@ const Hero = () => {
                     </div>
                 </motion.div>
 
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1, ease: "easeOut" }}
@@ -83,12 +83,13 @@ const Hero = () => {
                     <div className="relative group">
                         {/* Image Backdrop Glow */}
                         <div className="absolute -inset-4 bg-gradient-to-tr from-primary to-accent opacity-20 blur-2xl group-hover:opacity-40 transition-opacity duration-500 rounded-full" />
-                        
+
                         <div className="relative w-64 h-64 md:w-96 md:h-96 rounded-3xl overflow-hidden border-2 border-white/10 glass shadow-2xl transition-transform duration-500 group-hover:rotate-2 group-hover:scale-105">
                             <Image
-                                src="/kartik.jpg"
+                                src="https://cdn.jsdelivr.net/gh/Kartik-Gangil/portfolio@main/public/kartik.jpg"
                                 alt="Kartik Gangil"
                                 fill
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 className="object-cover transition-transform duration-700 group-hover:scale-110"
                                 priority
                             />
@@ -97,7 +98,7 @@ const Hero = () => {
                         </div>
 
                         {/* Floating Badges */}
-                        <motion.div 
+                        <motion.div
                             animate={{ y: [0, -10, 0] }}
                             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                             className="absolute -top-6 -right-6 glass p-4 rounded-2xl border-white/10 shadow-xl hidden md:block"

@@ -13,7 +13,7 @@ const Aboutme = () => {
     return (
         <section id='about' className='relative min-h-screen py-24 px-5 md:px-20 scroll-mt-24 bg-background overflow-hidden'>
             <div className="container mx-auto">
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
@@ -27,7 +27,7 @@ const Aboutme = () => {
                 </motion.div>
 
                 <div className='flex flex-col lg:flex-row justify-center items-center gap-12 xl:gap-20'>
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
@@ -35,21 +35,22 @@ const Aboutme = () => {
                     >
                         {/* Decorative Background Elements */}
                         <div className="absolute -inset-2 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur-xl" />
-                        
+
                         <div className='relative aspect-[4/5] w-full rounded-2xl overflow-hidden glass border-white/20 shadow-2xl'>
                             <Image
                                 className='object-cover hover:scale-105 transition-transform duration-700'
-                                src="/microsoft_kartik.jpg" 
-                                fill 
-                                alt="Kartik" 
+                                src="https://cdn.jsdelivr.net/gh/Kartik-Gangil/portfolio@main/public/microsoft_kartik.jpg"
+                                fill
+                                alt="Kartik"
                                 priority
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             />
                             {/* Gradient Overlay */}
                             <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
                         </div>
 
                         {/* Floating Experience Badge */}
-                        <motion.div 
+                        <motion.div
                             animate={{ y: [0, -10, 0] }}
                             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                             className="absolute -bottom-6 -right-6 lg:-right-10 glass p-5 rounded-2xl border-white/10 shadow-2xl space-y-1"
@@ -60,7 +61,7 @@ const Aboutme = () => {
                         </motion.div>
                     </motion.div>
 
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.3 }}
@@ -78,7 +79,7 @@ const Aboutme = () => {
 
                         <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                             {stats.map((stat, i) => (
-                                <motion.div 
+                                <motion.div
                                     key={i}
                                     whileHover={{ y: -5 }}
                                     className='glass p-6 rounded-2xl border-white/10 hover:border-primary/30 transition-all duration-300'
