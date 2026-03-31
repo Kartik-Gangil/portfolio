@@ -7,7 +7,8 @@ import { Award, Briefcase, Code2, Rocket } from 'lucide-react';
 const Aboutme = () => {
     const stats = [
         { label: 'Projects Completed', value: '10+', icon: Rocket, color: 'text-primary' },
-        { label: 'Years Experience', value: '2+', icon: Briefcase, color: 'text-accent' },
+        { label: 'Years Experience', value: '3+', icon: Briefcase, color: 'text-accent' },
+        { label: 'Production Shipped', value: '2', icon: Rocket, color: 'text-primary' },
     ];
 
     return (
