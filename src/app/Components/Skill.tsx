@@ -1,97 +1,132 @@
-'use client'
-import { motion, useInView } from 'framer-motion';
-import { Code, CodeXml, Container, Database, GitBranchIcon } from "lucide-react"
-import { useRef, useState, useEffect } from "react";
+'use client';
 
-interface Skill {
+import { motion } from 'framer-motion';
+import { Code, CodeXml, Container, Database, GitBranchIcon, Cpu, Layout, Server, Cloud, LucideIcon } from "lucide-react"
+
+interface SkillType {
   id: string;
   domain: string;
-  icon: React.ReactNode;
+  icon: LucideIcon;
   skills: string[];
+  size?: 'small' | 'medium' | 'large';
+  color: string;
 }
 
+const SkillCard = ({ domain, icon: Icon, skills, size = 'small', color }: SkillType) => {
+  const sizeClasses = {
+    small: 'col-span-1 row-span-1',
+    medium: 'col-span-1 md:col-span-2 row-span-1',
+    large: 'col-span-1 md:col-span-2 row-span-2',
+  };
 
-const CardComponent = ({ id, domain, icon, skills }: Skill) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' }); // Trigger when near viewport
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: 0.2 }}
-      className="   group border flex flex-col justify-center items-center border-gray-300 rounded-lg p-5  hover:shadow-xl  transition-all duration-300 transform hover:-translate-y-2">
-      <span className="inline-flex items-center justify-center w-15 h-15 text-blue-600 bg-blue-100 rounded-full text-xl font-bold group-hover:shadow-xl p-3 transition-all duration-300 transform group-hover:scale-105">
-        {icon}
-      </span>
-      <h1 className="font-bold text-xl mb-5 mt-5">{domain}</h1>
-      <ul className="flex flex-wrap gap-5 mb-5 ">{
-        skills.map((skill, index) => (
-          <li key={index} className="bg-gray-500/10 px-2 rounded-2xl font-semibold text-sm">{skill}</li>
-        ))
-      }
-      </ul>
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ y: -5, transition: { duration: 0.2 } }}
+      className={`glass group p-6 rounded-3xl border-white/10 hover:border-primary/40 transition-all duration-300 relative overflow-hidden ${sizeClasses[size]}`}
+    >
+      {/* Background Accent Glow */}
+      <div className={`absolute -right-10 -top-10 w-32 h-32 blur-[80px] opacity-20 group-hover:opacity-40 transition-opacity duration-500 rounded-full ${color}`} />
+      
+      <div className="relative z-10 space-y-4">
+        <div className={`w-12 h-12 rounded-2xl flex items-center justify-center p-2.5 glass border-white/20 group-hover:border-primary/50 group-hover:scale-110 group-hover:shadow-[0_0_15px_-3px_primary] transition-all duration-500`}>
+          <Icon className={`w-full h-full text-primary`} />
+        </div>
+        
+        <div>
+          <h3 className="font-bold text-xl mb-3 tracking-tight group-hover:text-primary transition-colors">{domain}</h3>
+          <ul className="flex flex-wrap gap-2">
+            {skills.map((skill, index) => (
+              <li 
+                key={index} 
+                className="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-medium text-foreground/70 group-hover:bg-primary/10 group-hover:border-primary/20 group-hover:text-foreground transition-all duration-300"
+              >
+                {skill}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </motion.div>
-  )
-}
-
+  );
+};
 
 const Skill = () => {
-  const [skills, setSkills] = useState<Skill[]>([{
-    id: '1',
-    domain: 'Frontend',
-    icon: <Code className="w-6 h-6" />,
-    skills: ['Material UI', 'HTML5', 'CSS3', 'Bootstrap', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'React', 'Next.js']
-  }, {
-    id: '2',
-    domain: 'Database',
-    icon: <Database className="w-6 h-6" />,
-    skills: ['MongoDB', 'SQL', 'Supabase', 'Firebase', 'MariaDB', 'Postgres']
-  },
-  {
-    id: '3',
-    domain: 'Programming Languages',
-    icon: <CodeXml className="w-6 h-6" />,
-    skills: ['C++', 'JavaScript', 'TypeScript','Node js']
-  },
-  {
-    id: '4',
-    domain: 'Version Control',
-    icon: <GitBranchIcon className="w-6 h-6" />,
-    skills: ['Git', 'GitHub', 'GitBash']
-  },
-  {
-    id: '5',
-    domain: 'Deployement Tools',
-    icon: <Container className="w-6 h-6" />,
-    skills: ['AWS(S3, Lightsail)', 'Vercel', 'Netlify', 'Render', 'Railway', 'Docker']
-  },
-  ]);
-
-
+  const skills: SkillType[] = [
+    {
+      id: '1',
+      domain: 'Frontend Architecture',
+      icon: Layout,
+      skills: ['TypeScript', 'React.js', 'Next.js', 'Tailwind CSS', 'Material UI', 'Framer Motion'],
+      size: 'medium',
+      color: 'bg-blue-500'
+    },
+    {
+      id: '2',
+      domain: 'Backend & APIs',
+      icon: Server,
+      skills: ['Node.js', 'Express.js', 'RESTful APIs', 'Server Actions'],
+      size: 'medium',
+      color: 'bg-purple-500'
+    },
+    {
+      id: '3',
+      domain: 'Data Management',
+      icon: Database,
+      skills: ['MongoDB', 'PostgreSQL', 'Mongoose', 'Prisma', 'Supabase'],
+      size: 'small',
+      color: 'bg-emerald-500'
+    },
+    {
+      id: '4',
+      domain: 'Development Ops',
+      icon: Cloud,
+      skills: ['AWS (S3, Lightsail)', 'Docker', 'Vercel', 'CI/CD Pipeline'],
+      size: 'small',
+      color: 'bg-orange-500'
+    },
+    {
+      id: '5',
+      domain: 'Version Control & Workflow',
+      icon: GitBranchIcon,
+      skills: ['Git', 'GitHub', 'Agile/Scrum', 'GitBash'],
+      size: 'medium',
+      color: 'bg-cyan-500'
+    },
+  ];
 
   return (
-    <section id="skill" className="min-h-screen scroll-mt-24 mb-5 md:px-20 px-5">
-      <h1 className="text-3xl font-bold text-center mb-3">Skills & Technologies</h1>
-      <p className="text-lg text-gray-500 text-center">I work with a diverse set of technologies to bring ideas to life</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-15">
-        {skills.length > 0 ? (
-          skills.map((skill, index) => (
-            <CardComponent
-              key={index}
-              id={skill.id}
-              domain={skill.domain}
-              icon={skill.icon}
-              skills={skill.skills}
+    <section id="skill" className="relative py-24 px-5 md:px-20 scroll-mt-24 bg-background overflow-hidden">
+      {/* Decorative Blur Backgrounds */}
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] -translate-x-1/2" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-[120px] translate-x-1/2 translate-y-1/2" />
+
+      <div className="container mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-center mb-16 space-y-4"
+        >
+          <h2 className="text-primary text-sm font-bold tracking-widest uppercase">Tech Stack</h2>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-glow">Expertise & Technologies</h1>
+          <p className="max-w-xl mx-auto text-muted-foreground">
+            A comprehensive set of tools and platforms I use to build scalable, high-performance web solutions.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-fr">
+          {skills.map((skill) => (
+            <SkillCard
+              key={skill.id}
+              {...skill}
             />
-          ))
-        ) : (
-          "No skills available"
-        )}
+          ))}
+        </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Skill
-
+export default Skill;
