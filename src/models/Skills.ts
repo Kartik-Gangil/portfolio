@@ -13,9 +13,15 @@ const SkillSchema = new mongoose.Schema({
     skills: {
         type: [String],
         required: true
+    },
+    // Optional size used by UI layout: 'small' | 'medium' | 'large'
+    size: {
+        type: String,
+        enum: ['small', 'medium', 'large'],
+        default: 'small'
     }
 });
 
-const Skill = models.Project || model("Skill", SkillSchema);
+const Skill = models.Skill || model("Skill", SkillSchema);
 
 export default Skill;

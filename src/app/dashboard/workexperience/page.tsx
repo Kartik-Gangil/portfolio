@@ -1,8 +1,8 @@
 'use client';
 
 import { Button } from "@/components/ui/button";
-import { Trash } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { Trash, GripVertical } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
 
 // interface WorkExp {
 //   year: string;
@@ -20,6 +20,7 @@ interface WorkExpData {
 const Page = () => {
   const [workData, setWorkData] = useState<WorkExpData[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const dragItem = useRef<number | null>(null);
   const [formData, setFormData] = useState<WorkExpData>({
     id: "",
     year: "",
@@ -46,6 +47,40 @@ const Page = () => {
   useEffect(() => {
     fetchWorkData();
   }, []);
+
+  const handleDragStart = (e: React.DragEvent, index: number) => {
+    dragItem.current = index;
+    e.dataTransfer.effectAllowed = 'move';
+  }
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  }
+
+  const handleDrop = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    const from = dragItem.current;
+    const to = index;
+    if (from === null || from === undefined) return;
+    if (from === to) return;
+    const items = Array.from(workData);
+    const [moved] = items.splice(from, 1);
+    items.splice(to, 0, moved);
+    setWorkData(items);
+    dragItem.current = null;
+  }
+
+  const saveOrder = async () => {
+    try {
+      await fetch('/api/Experience', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ order: workData.map(w => w.id) }),
+      });
+      console.log('Order saved');
+    } catch (e) { console.log(e) }
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -95,7 +130,7 @@ const Page = () => {
         .then(res => res.json())
         .then(data => {
           console.log("Data deleted successfully:", data);
-          fetchWorkData(); 
+          fetchWorkData();
         })
     } catch (error) {
       console.log(error);
@@ -104,29 +139,41 @@ const Page = () => {
 
 
   return (
-    <div className="bg-gray-50 p-6 rounded-md">
-      <div className="flex justify-between items-center mb-6">
+    <div className="">
+      <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-bold text-gray-900">Work Experience</h2>
-        <button
-          onClick={() => setIsDialogOpen(true)}
-          className="px-4 py-2 text-sm bg-gray-200 text-gray-800 rounded-full hover:bg-gray-300 transition"
-        >
-          Add Experience
-        </button>
+        <Button onClick={() => setIsDialogOpen(true)} className="px-3 py-1">Add Experience</Button>
       </div>
 
-      <div className="divide-y divide-gray-200">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {workData.map((item, index) => (
-          <div
-            key={index}
-            className="flex justify-between py-4 text-sm text-gray-800"
+          <div key={item.id}
+            draggable
+            onDragStart={(e) => handleDragStart(e, index)}
+            onDragOver={handleDragOver}
+            onDrop={(e) => handleDrop(e, index)}
           >
-            <span className="text-black font-bold">{item.company}</span>
-            <span className="ml-4">{item.role}</span>
-            <span className="text-blue-600 font-medium">{item.year}</span>
-            <Button onClick={() => handleDelete(item.id)}><Trash /></Button>
+            <div className="bg-white p-4 rounded-lg shadow-sm flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <GripVertical className="h-5 w-5 text-gray-400" />
+                <div>
+                  <div className="text-sm text-gray-500">{item.role}</div>
+                  <div className="font-semibold">{item.company}</div>
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="text-blue-600 font-medium">{item.year}</div>
+                <Button variant="ghost" size="icon" onClick={() => handleDelete(item.id)}>
+                  <Trash />
+                </Button>
+              </div>
+            </div>
           </div>
         ))}
+      </div>
+
+      <div className='mt-4 flex items-center justify-end gap-3'>
+        <Button onClick={saveOrder} className='px-3 py-1'>Save Order</Button>
       </div>
 
       {/* Dialog Box */}

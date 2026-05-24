@@ -11,7 +11,6 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const { theme, toggleTheme } = useTheme();
-
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, {
         stiffness: 100,
@@ -58,7 +57,7 @@ const Navbar = () => {
                     <motion.h1
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70 group-hover:from-primary group-hover:to-accent transition-all duration-300"
+                        className={`text-xl md:text-2xl font-bold bg-clip-text text-transparent ${theme === 'dark' ? 'bg-gradient-to-r from-white to-white/70' : 'bg-gradient-to-r from-black to-black/50'} group-hover:from-primary group-hover:to-accent transition-all duration-300`}
                     >
                         Kartik Gangil
                     </motion.h1>
@@ -86,7 +85,7 @@ const Navbar = () => {
                     {/* Theme Toggle (desktop) */}
                     <button
                         id="theme-toggle"
-                        onClick={toggleTheme}
+                        onClick={() => toggleTheme()}
                         aria-label="Toggle theme"
                         className="p-2 rounded-lg glass text-foreground/80 hover:text-primary transition-all duration-300 hover:scale-110"
                     >

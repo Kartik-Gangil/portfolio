@@ -9,6 +9,7 @@ interface SkillData {
   icon: string;
   domain: string;
   skills: string[];
+  size?: string;
 }
 
 const Page = () => {
@@ -18,7 +19,8 @@ const Page = () => {
     id: "",
     icon: "",
     domain: "",
-    skills: []
+    skills: [],
+    size: 'small'
   });
 
   const fetchSkillData = async () => {
@@ -30,6 +32,7 @@ const Page = () => {
         icon: item.icon,
         domain: item.domain,
         skills: item.skills,
+        size: item.size || 'small',
       }));
       setSkillData(formattedData);
     } catch (error) {
@@ -48,43 +51,62 @@ const Page = () => {
       .join(' ');
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    if (e.target.name === 'skills') {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+    if (name === 'skills') {
       // Split the comma-separated string into an array and capitalize each skill
       setFormData({
         ...formData,
-        skills: e.target.value.split(',').map(skill => capitalizeString(skill.trim()))
+        skills: value.split(',').map(skill => capitalizeString(skill.trim()))
+      });
+    } else if (name === 'size') {
+      // sizes should be stored as lowercase values
+      setFormData({
+        ...formData,
+        size: value,
       });
     } else {
       setFormData({
         ...formData,
-        [e.target.name]: capitalizeString(e.target.value),
+        [name]: capitalizeString(value),
       });
     }
   };
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('/api/skills', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          icon: formData.icon,
-          domain: formData.domain,
-          skills: formData.skills,
-        }),
-      });
-      const data = await response.json();
-      console.log("Data posted successfully:", data);
-      fetchSkillData(); // Refresh list after successful post
+      const payload = {
+        icon: formData.icon,
+        domain: formData.domain,
+        skills: formData.skills,
+        size: formData.size || 'small',
+      } as any;
 
-      // Reset form
-      setFormData({ id: "", icon: "", domain: "", skills: [] });
+      // If editing existing item, call PUT with id
+      if (formData.id) {
+        payload.id = formData.id;
+        const response = await fetch('/api/skills', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await response.json();
+        console.log('Updated skill:', data);
+      } else {
+        const response = await fetch('/api/skills', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await response.json();
+        console.log('Created skill:', data);
+      }
+
+      await fetchSkillData(); // refresh list
+      setFormData({ id: "", icon: "", domain: "", skills: [], size: 'small' });
       setIsDialogOpen(false);
     } catch (error) {
-      console.error("Error posting data:", error);
+      console.error('Error saving skill:', error);
     }
   };
 
@@ -105,37 +127,38 @@ const Page = () => {
     }
   };
 
+  const handleEdit = (item: SkillData) => {
+    setFormData({ id: item.id, icon: item.icon, domain: item.domain, skills: item.skills, size: item.size || 'small' });
+    setIsDialogOpen(true);
+  };
+
   return (
-    <div className="bg-gray-50 p-6 rounded-md">
-      <div className="flex justify-between items-center mb-6">
+    <div className="">
+      <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-bold text-gray-900">Skills Management</h2>
-        <button
-          onClick={() => setIsDialogOpen(true)}
-          className="px-4 py-2 text-sm bg-gray-200 text-gray-800 rounded-full hover:bg-gray-300 transition"
-        >
-          Add Skill
-        </button>
+        <Button onClick={() => setIsDialogOpen(true)} className="px-3 py-1">Add Skill</Button>
       </div>
 
-      <div className="divide-y divide-gray-200">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {skillData.map((item, index) => (
-          <div
-            key={index}
-            className="flex justify-evenly items-center py-4 text-sm gap-3 text-gray-800"
-          >
-            <span className="inline-flex items-center justify-center w-15 h-15 text-blue-600 bg-blue-100 rounded-full text-xl font-bold group-hover:shadow-xl p-3 transition-all duration-300 transform group-hover:scale-105">
-              <Code className="h-6 w-6"/>
-            </span>
-            <span className="text-black font-bold">{item.domain}</span>
-            <span className="ml-4 flex-1 px-4">{item.skills.join(", ")}</span>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => handleDelete(item.id)}
-              className="ml-2"
-            >
-              <Trash className="h-4 w-4" />
-            </Button>
+          <div key={index} className="bg-white p-4 rounded-lg shadow-sm flex items-start gap-4">
+            <div className="flex-shrink-0 inline-flex items-center justify-center w-12 h-12 text-blue-600 bg-blue-50 rounded-full">
+              <Code className="h-5 w-5" />
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center justify-between">
+                <h3 className="font-semibold text-gray-900">{item.domain}</h3>
+                <div className="flex items-center gap-2">
+                  <Button variant="ghost" size="icon" onClick={() => handleEdit(item)}>
+                    Edit
+                  </Button>
+                  <Button variant="ghost" size="icon" onClick={() => handleDelete(item.id)}>
+                    <Trash className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <p className="text-sm text-gray-600 mt-2">{item.skills.join(', ')}</p>
+            </div>
           </div>
         ))}
       </div>
@@ -181,6 +204,20 @@ const Page = () => {
                   className="mt-1 w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   rows={3}
                 />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium">Size</label>
+                <select
+                  name="size"
+                  value={formData.size || 'small'}
+                  onChange={handleChange}
+                  className="mt-1 w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="small">Small</option>
+                  <option value="medium">Medium</option>
+                  <option value="large">Large</option>
+                </select>
               </div>
             </div>
 

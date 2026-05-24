@@ -1,19 +1,20 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Github, ExternalLink, ArrowUpRight, FolderCode } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 interface ProjectType {
+    _id?: string;
     title: string;
     description: string;
     techStack: string[];
     image: string;
     githubLink: string;
-    liveLink: string;
+    liveLink?: string;
 }
 
 const ProjectCard = ({ title, description, techStack, image, githubLink, liveLink }: ProjectType) => {
@@ -83,40 +84,23 @@ const ProjectCard = ({ title, description, techStack, image, githubLink, liveLin
 }
 
 const Project = () => {
-    const projects: ProjectType[] = [
-        {
-            title: "ReadmeUp",
-            description: "Advanced AI-powered documentation engine that analyzes repository structures to generate professional, SEO-optimized README files. Built with a focus on ease-of-use and developer productivity.",
-            techStack: ["Next.js", "GPT-4", "TailwindCSS", "Node.js", "TypeScript"],
-            image: "https://readmeup.creovateio.in/favicon.ico",
-            githubLink: "https://github.com/Kartik-Gangil/AI-based-GITHUB-readme-generator",
-            liveLink: "https://readmeup.creovateio.in"
-        },
-        {
-            title: "Varsha Research",
-            description: "A comprehensive digital platform for a research organization, featuring dynamic paper indexing, researcher profiles, and a high-performance publication management system.",
-            techStack: ["React", "Material UI", "Express", "AWS Lightsail", "TypeScript"],
-            image: "https://www.creovateio.in/Varsha_research_org_banner.webp",
-            githubLink: "https://varsharesearchorganization.com/",
-            liveLink: "https://varsharesearchorganization.com/"
-        },
-        {
-            title: "AutoPodder",
-            description: "Cutting-edge podcast automation platform that leverages AI for speech-to-text, synthesis, and thematic generation. Provides a seamless end-to-end workflow for podcast creators.",
-            techStack: ["Next.js 14", "ElevenLabs", "Deepgram", "GenAI", "PostgreSQL"],
-            image: "/Autopodder.png",
-            githubLink: "https://github.com/Kartik-Gangil/AutoPodder.git",
-            liveLink: "https://github.com/Kartik-Gangil/AutoPodder.git"
-        },
-        {
-            title: "JARVIS AI",
-            description: "A sophisticated personal assistant integrated with modern APIs to manage tasks, retrieve real-time data, and provide an interactive terminal interface for workflow optimization.",
-            techStack: ["Python", "OpenAI API", "SQLite", "Speech Recognition"],
-            image: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/07712d52323517.5608d99892165.png",
-            githubLink: "https://github.com/Kartik-Gangil/jarvis-using-pyton",
-            liveLink: "https://github.com/Kartik-Gangil/jarvis-using-pyton"
-        },
-    ];
+    const [projects, setProjects] = useState<ProjectType[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        let mounted = true;
+        setLoading(true);
+        fetch('/api/Project')
+            .then((res) => res.json())
+            .then((data) => {
+                if (!mounted) return;
+                // data expected as array of project objects
+                setProjects(data || []);
+            })
+            .catch((err) => console.error('Failed to load projects', err))
+            .finally(() => { if (mounted) setLoading(false); });
+        return () => { mounted = false; };
+    }, []);
 
     return (
         <section id="project" className="relative py-24 px-5 md:px-20 scroll-mt-24 bg-background overflow-hidden">
@@ -125,7 +109,7 @@ const Project = () => {
             <div className="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-accent/5 rounded-full blur-[150px] translate-y-1/2" />
 
             <div className="container mx-auto">
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     className="text-center mb-20 space-y-4"
@@ -140,9 +124,15 @@ const Project = () => {
                 </motion.div>
 
                 <div className="flex flex-wrap justify-center gap-10">
-                    {projects.map((project, index) => (
-                        <ProjectCard key={index} {...project} />
-                    ))}
+                    {loading ? (
+                        <div className="text-sm text-gray-400">Loading projects…</div>
+                    ) : projects.length === 0 ? (
+                        <div className="text-sm text-gray-400">No projects found.</div>
+                    ) : (
+                        projects.map((project) => (
+                            <ProjectCard key={project._id ?? project.title} {...project} />
+                        ))
+                    )}
                 </div>
             </div>
         </section>

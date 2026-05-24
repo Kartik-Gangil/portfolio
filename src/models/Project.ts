@@ -24,7 +24,12 @@ const ProjectSchema = new mongoose.Schema({
     liveLink: {
         type: String,
     },
-    
+    // numeric position for ordering in dashboard
+    position: {
+        type: Number,
+        default: 0,
+    },
+
 })
 
 const Project = models.Project || model("Project", ProjectSchema);
