@@ -14,7 +14,7 @@ interface ProjectType {
     techStack: string[];
     image: string;
     githubLink: string;
-    liveLink?: string;
+    liveLink: string;
 }
 
 const ProjectCard = ({ title, description, techStack, image, githubLink, liveLink }: ProjectType) => {
